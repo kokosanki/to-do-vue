@@ -2,11 +2,28 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/completed">Completed</router-link>
     </div>
-    <router-view />
+    <keep-alive>
+      <router-view :done="done" :onCompleteTodo="onCompleteTodo" />
+    </keep-alive>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      done: []
+    };
+  },
+  methods: {
+    onCompleteTodo(todo) {
+      this.done.push(todo);
+    }
+  }
+};
+</script>
 
 <style lang="scss">
 #app {
